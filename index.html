@@ -102,19 +102,19 @@
         </div>
       </div>
       <div class="session">
-        <h2>Month: <label id="month">January</label></h2>
+        <h2><label id="month">January</label></h2>
         <input
           id="slider"
           class="row"
           type="range"
-          min="0"
-          max="11"
+          min="1"
+          max="12"
           step="1"
-          value="0"
+          value="1"
         />
       </div>
       <div class="session">
-        <h2>West Coast</h2>
+        <h2>Area of Focus</h2>
         <div class="row" id="filters">
           <input
             id="all"
@@ -163,15 +163,15 @@
             
             // Create a month property value based on time
             // used to filter against.
-            wildfires.features = wildfires.features.map((d) => {
-                d.properties.month = new Date(d.properties.FireDiscoveryDate).getMonth();
-                return d;
-            });
+            // wildfires.features = wildfires.features.map((d) => {
+            //     d.properties.month = new Date(d.properties.FireDiscoveryDate).getMonth();
+            //     return d;
+            // });
 
-            console.log(wildfires);
+            //console.log(wildfires);
             
             let filterCountry = ['!=', ['string', ['get', 'POOState']], 'placeholder'];
-            let filterMonth = ['==', ['number', ['get', 'month']], 0];
+            let filterMonth = ['==', ['number', ['get', 'Month']], 1];
 
             map.addSource('wildfires',{
                 type: 'geojson',
@@ -185,10 +185,9 @@
                 paint: {
                     'circle-radius': 2,
                     'circle-stroke-width': 0.5,
-                    'circle-color': 'red',
-                    'circle-stroke-color': 'white',
-                }
-            //'filter': [filterCountry]
+                    'circle-color': 'red'
+                },
+            'filter': ["all", filterCountry, filterMonth]
             
             //   paint: {
             //      'circle-radius': 4,//[
@@ -254,9 +253,9 @@
                     'November',
                     'December'
                 ];
-                filterMonth = ['==', ['number', ['get', 'month']], month];
+                filterMonth = ['==', ['number', ['get', 'Month']], month];
                 map.setFilter('wildfires-layer', ['all', filterCountry, filterMonth]);
-                document.getElementById('month').textContent = months[month];
+                document.getElementById('month').textContent = months[month-1];
             });
 
             document
@@ -265,15 +264,23 @@
                 const country = event.target.value;
                 // update the map filter
                 if (country === 'all') {
-                filterCountry = ['!=', ['string', ['get', 'POOState']], 'placeholder'];
+                  filterCountry = ['!=', ['string', ['get', 'POOState']], 'placeholder'];
+                  map.flyTo({
+                  center: [-120.7129, 43.0902],
+                  zoom: 4
+                  });
                 } else if (country === 'ca') {
-                filterCountry = [
-                    'match',
-                    ['get', 'POOState'],
-                    ['US-CA'],
-                    true,
-                    false
-                ];
+                  filterCountry = [
+                      'match',
+                      ['get', 'POOState'],
+                      ['US-CA'],
+                      true,
+                      false
+                  ];
+                  map.flyTo({
+                    center: [-119.4179, 36.7783],
+                    zoom: 5
+                  });
                 } else if (country === 'wa') {
                 filterCountry = [
                     'match',
@@ -282,6 +289,10 @@
                     true,
                     false
                 ];
+                map.flyTo({
+                  center: [-120.7401, 47.7511],
+                  zoom: 5.5
+                });
                 } else if (country === 'or') {
                 filterCountry = [
                     'match',
@@ -290,6 +301,10 @@
                     true,
                     false
                 ];
+                map.flyTo({
+                  center: [-120.5542, 43.8041],
+                  zoom: 5.5
+                });
                 } else {
                 console.error('error');
                 }
