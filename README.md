@@ -80,7 +80,7 @@ choosing to use the dark themed open street map in the project.
 
 We would like to acknowledge the University of Washington, as this project was
 made as the final project for the course Geography 495: Web GIS. We further would like
-to thank our instructor Bo Zhao (zhaobo@uw.edu) andteaching assistant Steven Bao
+to thank our instructor Bo Zhao (zhaobo@uw.edu) and teaching assistant Steven Bao
 (bxq98@uw.edu).
 
 
