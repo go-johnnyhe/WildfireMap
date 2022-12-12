@@ -43,6 +43,9 @@ viewers of our map so that they are aware of how important this matter is.
 https://dimentio233.github.io/WildfireMap/home.html
 
 **Screenshots**
+![Home page](/assets/screenshot1.png)
+![Map](/assets/screenshot2.png)
+
 
 **Main functions**
 
