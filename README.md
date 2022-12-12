@@ -40,7 +40,7 @@ viewers of our map so that they are aware of how important this matter is.
 
 **Application URL**
 
-https://dimentio233.github.io/WildfireMap/index.html
+https://dimentio233.github.io/WildfireMap/home.html
 
 **Screenshots**
 
