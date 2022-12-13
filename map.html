@@ -52,9 +52,8 @@
       position: absolute;
       margin: 10px;
       width: 300px;
-      height: 100%;
+      height: 86%;
       background-color: white;
-      ;
       padding: 10px 20px;
     }
 
@@ -239,7 +238,7 @@
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/chalsea2000/clblbrhoj000916rzxefiahqd',
-      center: [-120.7129, 43.0902],
+      center: [-120.7129, 41.0902],
       zoom: 4,
       projection: 'mercator'
     });
@@ -252,6 +251,8 @@
         let filterCountry = ['!=', ['string', ['get', 'POOState']], 'placeholder'];
         let filterMonth = ['==', ['number', ['get', 'Month']], 1];
 
+        map.addControl(new mapboxgl.NavigationControl());
+        
         map.addSource('wildfires', {
           type: 'geojson',
           data: 'assets/wildfires.geojson'
@@ -321,7 +322,7 @@
             if (country === 'all') {
               filterCountry = ['!=', ['string', ['get', 'POOState']], 'placeholder'];
               map.flyTo({
-                center: [-120.7129, 43.0902],
+                center: [-120.7129, 41.0902],
                 zoom: 4
               });
             } else if (country === 'ca') {
@@ -333,7 +334,7 @@
                 false
               ];
               map.flyTo({
-                center: [-119.4179, 36.7783],
+                center: [-120.4179, 36.9783],
                 zoom: 5
               });
             } else if (country === 'wa') {
