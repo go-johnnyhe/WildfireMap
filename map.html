@@ -14,6 +14,7 @@
         margin: 0;
         padding: 0;
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
       }
 
       #map {
@@ -42,31 +43,32 @@
       #console {
         position: absolute;
         margin: 10px;
-        width: 240px;
-        background-color: white;
+        width: 300px;
+        height: 100%;
+        background-color: white;;
         padding: 10px 20px;
       }
 
       .session {
         margin-bottom: 20px;
+
       }
 
       .row {
-        height: 60px;
+        height: 30px;
         width: 100%;
       }
-
+      
       .colors {
         background: linear-gradient(
           to right,
-          #2dc4b2,
-          #3bb3c3,
-          #669ec4,
-          #8b88b6,
-          #a2719b,
-          #aa5e79
+          #ffffb2,
+          #fecc5c,
+          #fd8d3c,
+          #f03b20,
+          #bd0026
         );
-        margin-bottom: 5px;
+        margin-bottom: 5px ;    
       }
 
       .label {
@@ -85,24 +87,27 @@
         Data:
         <a
           href="https://data.cityofnewyork.us/Public-Safety/NYPD-Motor-Vehicle-Collisions/h9gi-nx95"
-          >Wildfires in 2022</a
+          >WFIGS - 2022 Wildland Fire Locations to Date</a
         >
-        in NYC, Jan 2016
+        from the National Interagency Fire Center
       </p>
       <div class="session">
-        <h2>Casualty</h2>
+        <h2>Daily Acres</h2>
         <div class="row colors"></div>
         <div class="row labels">
           <div class="label">0</div>
-          <div class="label">1</div>
-          <div class="label">2</div>
-          <div class="label">3</div>
-          <div class="label">4</div>
-          <div class="label">5+</div>
+          <div class="label">0.1</div>
+          <div class="label">10</div>
+          <div class="label">5000</div>
+          <div class="label"></div>
+          <div class="label">10000+</div>
         </div>
+        <p style = "font-style: italic; font-size: 12px;">Note: Daily acres is the measure of acres reported for a fire. 
+          Daily Acres with value 0 indicates that the fire size is unknown.</p>
       </div>
       <div class="session">
-        <h2><label id="month">January</label></h2>
+        <h2>Month: <label id="month">January</label></h2>
+        <p style = "font-size: 12px;">Slide to see the wildfires for different months!</p>
         <input
           id="slider"
           class="row"
@@ -137,12 +142,13 @@
       </div>
     </div>
     <script>
-      mapboxgl.accessToken = 'pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw';
+      mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhbHNlYTIwMDAiLCJhIjoiY2wydXR5a3RhMDVqajNlbnByZWI0NDAxbiJ9.U4cRxk4e5pgB64U7aSYttQ';
       const map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/dark-v11',
+        style: 'mapbox://styles/chalsea2000/clblbrhoj000916rzxefiahqd',
         center: [-120.7129, 43.0902],
-        zoom: 4
+        zoom: 4,
+        projection: 'mercator'
       });
 
       async function geojsonFetch() {
@@ -150,26 +156,6 @@
         let wildfires = await response.json();
 
         map.on('load', () => {
-        //     d3.json(
-        //         'https://docs.mapbox.com/mapbox-gl-js/assets/significant-earthquakes-2015.geojson',
-        //         jsonCallback
-        //     );
-        // });
-            
-        // function jsonCallback(err, data) {
-        //     if (err) {
-        //         throw err;
-        //     }
-            
-            // Create a month property value based on time
-            // used to filter against.
-            // wildfires.features = wildfires.features.map((d) => {
-            //     d.properties.month = new Date(d.properties.FireDiscoveryDate).getMonth();
-            //     return d;
-            // });
-
-            //console.log(wildfires);
-            
             let filterCountry = ['!=', ['string', ['get', 'POOState']], 'placeholder'];
             let filterMonth = ['==', ['number', ['get', 'Month']], 1];
 
@@ -183,59 +169,35 @@
                 type: 'circle',
                 source: 'wildfires',
                 paint: {
-                    'circle-radius': 2,
+                    'circle-radius': [
+                    'interpolate',
+                    ['linear'],
+                    ['number', ['get', 'DailyAcres']],
+                    0,
+                    3,
+                    10000,
+                    20  
+                  ],
                     'circle-stroke-width': 0.5,
-                    'circle-color': 'red'
+                    'circle-color': [
+                      'interpolate',
+                      ['linear'],
+                      ['number', ['get', 'DailyAcres']],
+                      0,
+                      '#ffffb2',
+                      0.1,
+                      '#fecc5c',
+                      10,
+                      '#fd8d3c',
+                      5000,
+                      '#f03b20',
+                      10000,
+                      '#bd0026'
+                    ],
+                    'circle-opacity': 0.8
                 },
-            'filter': ["all", filterCountry, filterMonth]
-            
-            //   paint: {
-            //      'circle-radius': 4,//[
-            //     //   'interpolate',
-            //     //   ['linear'],
-            //     //   ['number', ['get', 'DiscoveryAcres']],
-            //     //   0,
-            //     //   4,
-            //     //   5,
-            //     //   24
-            //     // ],
-            //     'circle-color': 'blue',//[
-
-            //     //   'interpolate',
-            //     //   ['linear'],
-            //     //   ['number', ['get', 'DiscoveryAcres']],
-            //     //   0,
-            //     //   '#2DC4B2',
-            //     //   1,
-            //     //   '#3BB3C3',
-            //     //   2,
-            //     //   '#669EC4',
-            //     //   3,
-            //     //   '#8B88B6',
-            //     //   4,
-            //     //   '#A2719B',
-            //     //   5,
-            //     //   '#AA5E79'
-            //     //],
-            //     'circle-opacity': 0.8
-            //   },
-               
+            'filter': ["all", filterCountry, filterMonth]          
             });
-
-            // update hour filter when the slider is dragged
-            // document.getElementById('slider').addEventListener('input', (event) => {
-            //   const hour = parseInt(event.target.value);
-            //   // update the map
-            //   filterHour = ['==', ['number', ['get', 'FireDiscoveryDate']], hour];
-            //   map.setFilter('collisions', ['all', filterHour, filterCountry]);
-
-            //   // converting 0-23 hour to AMPM format
-            //   const ampm = hour >= 12 ? 'PM' : 'AM';
-            //   const hour12 = hour % 12 ? hour % 12 : 12;
-
-            //   // update text in the UI
-            //   document.getElementById('active-hour').innerText = hour12 + ampm;
-            // });
 
             document.getElementById('slider').addEventListener('input', (e) => {
                 const month = parseInt(e.target.value, 10);
