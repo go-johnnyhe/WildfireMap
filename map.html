@@ -1,285 +1,377 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>West Coast Wildfires</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js"></script>
-    <link
-      href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-      }
+<head>
+  <meta charset="utf-8" />
+  <title>West Coast Wildfires</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
-      #map {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 100%;
-      }
 
-      h1 {
-        font-size: 20px;
-        line-height: 30px;
-      }
+  <link rel="icon" type="image/x-icon" href="/assets/fav1.png">
 
-      h2 {
-        font-size: 14px;
-        line-height: 20px;
-        margin-bottom: 10px;
-      }
+  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js"></script>
+  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
 
-      a {
-        text-decoration: none;
-        color: #2dc4b2;
-      }
+    #map {
+      position: absolute;
+      z-index: -1;
+      top: 55px;
+      bottom: 0px;
+      width: 100%;
+    }
 
-      #console {
-        position: absolute;
-        margin: 10px;
-        width: 300px;
-        height: 100%;
-        background-color: white;;
-        padding: 10px 20px;
-      }
+    h1 {
+      font-size: 20px;
+      line-height: 30px;
+    }
 
-      .session {
-        margin-bottom: 20px;
+    h2 {
+      font-size: 14px;
+      line-height: 20px;
+      margin-bottom: 10px;
+    }
 
-      }
+    a {
+      text-decoration: none;
+      color: #2dc4b2;
+    }
 
-      .row {
-        height: 30px;
-        width: 100%;
-      }
-      
-      .colors {
-        background: linear-gradient(
-          to right,
+    #console {
+      position: absolute;
+      margin: 10px;
+      width: 300px;
+      height: 100%;
+      background-color: white;
+      ;
+      padding: 10px 20px;
+    }
+
+    .session {
+      margin-bottom: 20px;
+
+    }
+
+    .row1 {
+      height: 30px;
+      width: 100%;
+    }
+
+    .colors {
+      background: linear-gradient(to right,
           #ffffb2,
           #fecc5c,
           #fd8d3c,
           #f03b20,
-          #bd0026
-        );
-        margin-bottom: 5px ;    
-      }
+          #bd0026);
+      margin-bottom: 5px;
+    }
 
-      .label {
-        width: 15%;
-        display: inline-block;
-        text-align: center;
-      }
-    </style>
-  </head>
+    .label {
+      width: 15%;
+      display: inline-block;
+      text-align: center;
+    }
 
-  <body>
-    <div id="map"></div>
-    <div id="console">
-      <h1>2022 US West Coast Wildfires </h1>
-      <p>
-        Data:
-        <a
-          href="https://data.cityofnewyork.us/Public-Safety/NYPD-Motor-Vehicle-Collisions/h9gi-nx95"
-          >WFIGS - 2022 Wildland Fire Locations to Date</a
-        >
-        from the National Interagency Fire Center
-      </p>
-      <div class="session">
-        <h2>Daily Acres</h2>
-        <div class="row colors"></div>
-        <div class="row labels">
-          <div class="label">0</div>
-          <div class="label">0.1</div>
-          <div class="label">10</div>
-          <div class="label">5000</div>
-          <div class="label"></div>
-          <div class="label">10000+</div>
-        </div>
-        <p style = "font-style: italic; font-size: 12px;">Note: Daily acres is the measure of acres reported for a fire. 
-          Daily Acres with value 0 indicates that the fire size is unknown.</p>
+    .container1 {
+      position: relative;
+      text-align: center;
+      color: white;
+      font-size: 104px;
+    }
+
+    .centered {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .body-text {
+      background-color: #Fbb741;
+      display: flex;
+      flex-direction: column;
+      align-content: flex-end;
+      align-items: center;
+    }
+
+    .body-title-top {
+      color: white;
+      font-family: sans-serif;
+      font-size: 50px;
+      margin-top: 40px;
+    }
+
+    .body-title {
+      color: white;
+      font-family: sans-serif;
+      font-size: 50px;
+    }
+
+    .body-paragraph {
+      margin-top: 10px;
+      margin-bottom: 30px;
+      margin-left: 50px;
+      margin-right: 50px;
+      font-family: sans-serif;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .body-paragraph-sp {
+      margin-top: 10px;
+      margin-bottom: 30px;
+      margin-left: 50px;
+      margin-right: 50px;
+      font-family: sans-serif;
+      font-size: 25px;
+      line-height: 1.6;
+      color: white;
+    }
+
+    .import-img {
+      max-width: 30%;
+      margin-bottom: 35px;
+    }
+
+    .insert-img {
+      max-width: 70%;
+      margin-bottom: 35px;
+    }
+
+    .update-img {
+      max-width: 20%;
+      margin-bottom: 35px;
+    }
+
+    .result-img {
+      max-width: 20%;
+      margin-bottom: 35px;
+    }
+
+    .navbar-brand {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+  </style>
+  <title>Wildfire Visualization</title>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #Fbb741;">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+      aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <a class="navbar-brand" href="#">Wildfires</a>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link" href="Home.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Map</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Credits.html">Acknowledgements</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</head>
+
+<body>
+  <div id="map"></div>
+  <div id="console">
+    <h1>2022 US West Coast Wildfires </h1>
+    <p>
+      Data:
+      <a href="https://data.cityofnewyork.us/Public-Safety/NYPD-Motor-Vehicle-Collisions/h9gi-nx95">WFIGS - 2022
+        Wildland Fire Locations to Date</a>
+      from the National Interagency Fire Center
+    </p>
+    <div class="session">
+      <h2>Daily Acres</h2>
+      <div class="row1 colors"></div>
+      <div class="row1 labels">
+        <div class="label">0</div>
+        <div class="label">0.1</div>
+        <div class="label">10</div>
+        <div class="label">5000</div>
+        <div class="label"></div>
+        <div class="label">10000+</div>
       </div>
-      <div class="session">
-        <h2>Month: <label id="month">January</label></h2>
-        <p style = "font-size: 12px;">Slide to see the wildfires for different months!</p>
-        <input
-          id="slider"
-          class="row"
-          type="range"
-          min="1"
-          max="12"
-          step="1"
-          value="1"
-        />
-      </div>
-      <div class="session">
-        <h2>Area of Focus</h2>
-        <div class="row" id="filters">
-          <input
-            id="all"
-            type="radio"
-            name="toggle"
-            value="all"
-            checked="checked"
-          />
-          <label for="all">All</label>
-          <br>
-          <input id="wa" type="radio" name="toggle" value="wa" />
-          <label for="wa">Washington</label>
-          <br>
-          <input id="or" type="radio" name="toggle" value="or" />
-          <label for="or">Oregon</label>
-          <br>
-          <input id="ca" type="radio" name="toggle" value="ca" />
-          <label for="ca">California</label>
-        </div>
+      <p style="font-style: italic; font-size: 12px;">Note: Daily acres is the measure of acres reported for a fire.
+        Daily Acres with value 0 indicates that the fire size is unknown.</p>
+    </div>
+    <div class="session">
+      <h2>Month: <label id="month">January</label></h2>
+      <p style="font-size: 12px;">Slide to see the wildfires for different months!</p>
+      <input id="slider" class="row1" type="range" min="1" max="12" step="1" value="1" />
+    </div>
+    <div class="session">
+      <h2>Area of Focus</h2>
+      <div class="row1" id="filters">
+        <input id="all" type="radio" name="toggle" value="all" checked="checked" />
+        <label for="all">All</label>
+        <br>
+        <input id="wa" type="radio" name="toggle" value="wa" />
+        <label for="wa">Washington</label>
+        <br>
+        <input id="or" type="radio" name="toggle" value="or" />
+        <label for="or">Oregon</label>
+        <br>
+        <input id="ca" type="radio" name="toggle" value="ca" />
+        <label for="ca">California</label>
       </div>
     </div>
-    <script>
-      mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhbHNlYTIwMDAiLCJhIjoiY2wydXR5a3RhMDVqajNlbnByZWI0NDAxbiJ9.U4cRxk4e5pgB64U7aSYttQ';
-      const map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/chalsea2000/clblbrhoj000916rzxefiahqd',
-        center: [-120.7129, 43.0902],
-        zoom: 4,
-        projection: 'mercator'
-      });
+  </div>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhbHNlYTIwMDAiLCJhIjoiY2wydXR5a3RhMDVqajNlbnByZWI0NDAxbiJ9.U4cRxk4e5pgB64U7aSYttQ';
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/chalsea2000/clblbrhoj000916rzxefiahqd',
+      center: [-120.7129, 43.0902],
+      zoom: 4,
+      projection: 'mercator'
+    });
 
-      async function geojsonFetch() {
-        let response = await fetch('assets/wildfires.geojson');
-        let wildfires = await response.json();
+    async function geojsonFetch() {
+      let response = await fetch('assets/wildfires.geojson');
+      let wildfires = await response.json();
 
-        map.on('load', () => {
-            let filterCountry = ['!=', ['string', ['get', 'POOState']], 'placeholder'];
-            let filterMonth = ['==', ['number', ['get', 'Month']], 1];
+      map.on('load', () => {
+        let filterCountry = ['!=', ['string', ['get', 'POOState']], 'placeholder'];
+        let filterMonth = ['==', ['number', ['get', 'Month']], 1];
 
-            map.addSource('wildfires',{
-                type: 'geojson',
-                data: 'assets/wildfires.geojson'
-            })
-     
-            map.addLayer({
-                id: 'wildfires-layer',
-                type: 'circle',
-                source: 'wildfires',
-                paint: {
-                    'circle-radius': [
-                    'interpolate',
-                    ['linear'],
-                    ['number', ['get', 'DailyAcres']],
-                    0,
-                    3,
-                    10000,
-                    20  
-                  ],
-                    'circle-stroke-width': 0.5,
-                    'circle-color': [
-                      'interpolate',
-                      ['linear'],
-                      ['number', ['get', 'DailyAcres']],
-                      0,
-                      '#ffffb2',
-                      0.1,
-                      '#fecc5c',
-                      10,
-                      '#fd8d3c',
-                      5000,
-                      '#f03b20',
-                      10000,
-                      '#bd0026'
-                    ],
-                    'circle-opacity': 0.8
-                },
-            'filter': ["all", filterCountry, filterMonth]          
-            });
+        map.addSource('wildfires', {
+          type: 'geojson',
+          data: 'assets/wildfires.geojson'
+        })
 
-            document.getElementById('slider').addEventListener('input', (e) => {
-                const month = parseInt(e.target.value, 10);
-                const months = [
-                    'January',
-                    'February',
-                    'March',
-                    'April',
-                    'May',
-                    'June',
-                    'July',
-                    'August',
-                    'September',
-                    'October',
-                    'November',
-                    'December'
-                ];
-                filterMonth = ['==', ['number', ['get', 'Month']], month];
-                map.setFilter('wildfires-layer', ['all', filterCountry, filterMonth]);
-                document.getElementById('month').textContent = months[month-1];
-            });
-
-            document
-            .getElementById('filters')
-            .addEventListener('change', (event) => {
-                const country = event.target.value;
-                // update the map filter
-                if (country === 'all') {
-                  filterCountry = ['!=', ['string', ['get', 'POOState']], 'placeholder'];
-                  map.flyTo({
-                  center: [-120.7129, 43.0902],
-                  zoom: 4
-                  });
-                } else if (country === 'ca') {
-                  filterCountry = [
-                      'match',
-                      ['get', 'POOState'],
-                      ['US-CA'],
-                      true,
-                      false
-                  ];
-                  map.flyTo({
-                    center: [-119.4179, 36.7783],
-                    zoom: 5
-                  });
-                } else if (country === 'wa') {
-                filterCountry = [
-                    'match',
-                    ['get', 'POOState'],
-                    ['US-WA'],
-                    true,
-                    false
-                ];
-                map.flyTo({
-                  center: [-120.7401, 47.7511],
-                  zoom: 5.5
-                });
-                } else if (country === 'or') {
-                filterCountry = [
-                    'match',
-                    ['get', 'POOState'],
-                    ['US-OR'],
-                    true,
-                    false
-                ];
-                map.flyTo({
-                  center: [-120.5542, 43.8041],
-                  zoom: 5.5
-                });
-                } else {
-                console.error('error');
-                }
-                map.setFilter('wildfires-layer', ['all',filterCountry, filterMonth]);
-            });
+        map.addLayer({
+          id: 'wildfires-layer',
+          type: 'circle',
+          source: 'wildfires',
+          paint: {
+            'circle-radius': [
+              'interpolate',
+              ['linear'],
+              ['number', ['get', 'DailyAcres']],
+              0,
+              3,
+              10000,
+              20
+            ],
+            'circle-stroke-width': 0.5,
+            'circle-color': [
+              'interpolate',
+              ['linear'],
+              ['number', ['get', 'DailyAcres']],
+              0,
+              '#ffffb2',
+              0.1,
+              '#fecc5c',
+              10,
+              '#fd8d3c',
+              5000,
+              '#f03b20',
+              10000,
+              '#bd0026'
+            ],
+            'circle-opacity': 0.8
+          },
+          'filter': ["all", filterCountry, filterMonth]
         });
-     };
+
+        document.getElementById('slider').addEventListener('input', (e) => {
+          const month = parseInt(e.target.value, 10);
+          const months = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+          ];
+          filterMonth = ['==', ['number', ['get', 'Month']], month];
+          map.setFilter('wildfires-layer', ['all', filterCountry, filterMonth]);
+          document.getElementById('month').textContent = months[month - 1];
+        });
+
+        document
+          .getElementById('filters')
+          .addEventListener('change', (event) => {
+            const country = event.target.value;
+            // update the map filter
+            if (country === 'all') {
+              filterCountry = ['!=', ['string', ['get', 'POOState']], 'placeholder'];
+              map.flyTo({
+                center: [-120.7129, 43.0902],
+                zoom: 4
+              });
+            } else if (country === 'ca') {
+              filterCountry = [
+                'match',
+                ['get', 'POOState'],
+                ['US-CA'],
+                true,
+                false
+              ];
+              map.flyTo({
+                center: [-119.4179, 36.7783],
+                zoom: 5
+              });
+            } else if (country === 'wa') {
+              filterCountry = [
+                'match',
+                ['get', 'POOState'],
+                ['US-WA'],
+                true,
+                false
+              ];
+              map.flyTo({
+                center: [-120.7401, 47.7511],
+                zoom: 5.5
+              });
+            } else if (country === 'or') {
+              filterCountry = [
+                'match',
+                ['get', 'POOState'],
+                ['US-OR'],
+                true,
+                false
+              ];
+              map.flyTo({
+                center: [-120.5542, 43.8041],
+                zoom: 5.5
+              });
+            } else {
+              console.error('error');
+            }
+            map.setFilter('wildfires-layer', ['all', filterCountry, filterMonth]);
+          });
+      });
+    };
 
     geojsonFetch();
 
-      
-    </script>
-  </body>
-</html>
 
-      
+  </script>
+</body>
+
+</html>
