@@ -43,6 +43,9 @@ viewers of our map so that they are aware of how important this matter is.
 https://dimentio233.github.io/WildfireMap/home.html
 
 **Screenshots**
+![Home page](/assets/screenshot1.png)
+![Map](/assets/screenshot2.png)
+
 
 **Main functions**
 
@@ -77,7 +80,7 @@ choosing to use the dark themed open street map in the project.
 
 We would like to acknowledge the University of Washington, as this project was
 made as the final project for the course Geography 495: Web GIS. We further would like
-to thank our instructor Bo Zhao (zhaobo@uw.edu) andteaching assistant Steven Bao
+to thank our instructor Bo Zhao (zhaobo@uw.edu) and teaching assistant Steven Bao
 (bxq98@uw.edu).
 
 
