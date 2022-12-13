@@ -32,7 +32,7 @@ that occur throughout the year along the west coast of the country will help mit
 
 ## Application URL
 
-https://dimentio233.github.io/WildfireMap/home.html
+https://dimentio233.github.io/WildfireMap/index.html
 
 ## Screenshots
 ![Home page](/assets/screenshot1.png)
