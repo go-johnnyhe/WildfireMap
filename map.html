@@ -248,7 +248,7 @@
       let wildfires = await response.json();
 
       map.on('load', () => {
-        let filterCountry = ['!=', ['string', ['get', 'POOState']], 'placeholder'];
+        let filterState = ['!=', ['string', ['get', 'POOState']], 'placeholder'];
         let filterMonth = ['==', ['number', ['get', 'Month']], 1];
 
         map.addControl(new mapboxgl.NavigationControl());
@@ -290,7 +290,7 @@
             ],
             'circle-opacity': 0.8
           },
-          'filter': ["all", filterCountry, filterMonth]
+          'filter': ["all", filterState, filterMonth]
         });
 
         document.getElementById('slider').addEventListener('input', (e) => {
@@ -310,7 +310,7 @@
             'December'
           ];
           filterMonth = ['==', ['number', ['get', 'Month']], month];
-          map.setFilter('wildfires-layer', ['all', filterCountry, filterMonth]);
+          map.setFilter('wildfires-layer', ['all', filterState, filterMonth]);
           document.getElementById('month').textContent = months[month - 1];
         });
 
@@ -320,13 +320,13 @@
             const country = event.target.value;
             // update the map filter
             if (country === 'all') {
-              filterCountry = ['!=', ['string', ['get', 'POOState']], 'placeholder'];
+              filterState = ['!=', ['string', ['get', 'POOState']], 'placeholder'];
               map.flyTo({
                 center: [-120.7129, 41.0902],
                 zoom: 4
               });
             } else if (country === 'ca') {
-              filterCountry = [
+              filterState = [
                 'match',
                 ['get', 'POOState'],
                 ['US-CA'],
@@ -338,7 +338,7 @@
                 zoom: 5
               });
             } else if (country === 'wa') {
-              filterCountry = [
+              filterState = [
                 'match',
                 ['get', 'POOState'],
                 ['US-WA'],
@@ -350,7 +350,7 @@
                 zoom: 5.5
               });
             } else if (country === 'or') {
-              filterCountry = [
+              filterState = [
                 'match',
                 ['get', 'POOState'],
                 ['US-OR'],
@@ -364,7 +364,7 @@
             } else {
               console.error('error');
             }
-            map.setFilter('wildfires-layer', ['all', filterCountry, filterMonth]);
+            map.setFilter('wildfires-layer', ['all', filterState, filterMonth]);
           });
       });
     };
