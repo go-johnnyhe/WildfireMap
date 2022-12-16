@@ -67,6 +67,16 @@
       color: white;
     }
 
+    .body-paragraph-text {
+      margin-top: -10px;
+      margin-bottom: 30px;
+      margin-left: 50px;
+      margin-right: 50px;
+      font-family: sans-serif;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
     .import-img {
       max-width: 30%;
       margin-bottom: 35px;
@@ -87,12 +97,18 @@
       margin-bottom: 35px;
     }
 
+    .special-img {
+      background-color: white;
+      margin-bottom: 30px;
+    }
+
     .navbar-brand {
       margin-left: 1rem;
       margin-right: 1rem;
     }
   </style>
   <title>Wildfire Visualization</title>
+  <!-- nav bar -->
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #Fbb741;">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
       aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,7 +151,9 @@
     <p class="body-paragraph">Our goal is to inform citizens and government officials about
       how quickly wildfires can spread. By increasing awareness of consequences, we are equipped to reduce future
       occurrences of wildfires. This could also help the fire departments extinguish wildfires more efficiently by showing
-      common trends about how the fires spread and the factors that influence this trend. We used data from <a href="https://data-nifc.opendata.arcgis.com/datasets/nifc::wfigs-2022-wildland-fire-locations-to-date/about">National Interagency Fire Center</a> for its accurate, up-to-date data in both GeoJSON and CSV format.</p>
+      common trends about how the fires spread and the factors that influence this trend.</p>
+    <p class="body-paragraph">In this project, we are visualizing the wildfires that have occurred on the west coast of the United States. As residents of the state of Washington, we have experienced the effects of these wildfires more and more each year. Especially during the summer, smokey conditions have become a pressing issue. Oftentimes, the smoke in Washington originated from a fire from Oregon or California, which the wind currents carried to Washington. Thus we chose to analyze wildfire trends for the entire west coast.</p>
+    <img src="assets/fire-data.png" class="img-fluid special-img" alt="wildfire barchart">
     <p class="body-title">
       Our Process
     </p>
@@ -144,16 +162,25 @@
 
     </p> -->
     <p class="body-paragraph-sp">Import data</p>
+    <p class="body-paragraph-text">We decided to first clean data in CSV format, then convert it to a GeoJSON file to later visualize it with MapBox. Imported data becomes a table named “wildfires.”
+    </p>
     <img src="assets/Import.png" class="import-img">
     <p class="body-paragraph-sp">Create temporary table</p>
+    <p class="body-paragraph-text">We created a temporary table to clean data without fear of messing up the original file.
+    </p>
     <img src="assets/Create.png" class="import-img">
     <p class="body-paragraph-sp">Insert data</p>
+    <p class="body-paragraph-text">Then we inserted “wildfires” data into this temporary table while filtering for California, Oregon, and Washington.</p>
     <img src="assets/insert.png" class="insert-img">
     <p class="body-paragraph-sp">Handle nulls</p>
+    <p class="body-paragraph-text">Nulls in this dataset indicate “no area burned,” so we updated them to zero.</p>
     <img src="assets/update.png" class="update-img">
     <p class="body-paragraph-sp">Aggregate values</p>
+    <p class="body-paragraph-text">We used the<i> MONTH()</i> function and <i>GROUP BY</i> statement to display the cumulative amount of acres burnt in each state for each month.
+    </p>
     <img src="assets/Group.png" class="insert-img">
     <p class="body-paragraph-sp">Results</p>
+    <p class="body-paragraph-text">So far in December, there hasn’t been an instance of wildfire in Washington State, so we obtained one less row of data.</p>
     <img src="assets/result-ca.png" class="result-img">
     <img src="assets/result-or.png" class="result-img">
     <img src="assets/result-wa.png" class="result-img">
